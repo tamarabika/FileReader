@@ -1,12 +1,18 @@
 package org.example;
 
 import java.io.BufferedReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReader {
+public  class FileReader {
+    public static List<String> main(String[] args) {
+        if (args.length != 1) {
+            System.err.println("Usage: java LastFiveLines <file>");
+            System.exit(1);
+        }
 
-    public static List<String> readLastFiveLines(String fileName) {
+        String fileName = args[0];
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
@@ -21,6 +27,10 @@ public class FileReader {
         }
 
         int startIndex = Math.max(0, lines.size() - 5);
-        return lines.subList(startIndex, lines.size());
+        for (int i = startIndex; i < lines.size(); i++) {
+            System.out.println(lines.get(i));
+            return lines.subList(startIndex, lines.size());
+        }
+        return lines;
     }
 }
