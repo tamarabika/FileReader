@@ -1,7 +1,6 @@
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.FileReader;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,20 +10,11 @@ public class FileReaderSteps {
 
     private List<String> lastFiveLines;
 
-
-
-
-
-//  @When("I read txt file")
-//    public void iReadTxtFile() {
-//        String[] sixLinesFile = {System.getProperty("user.dir") + "/src/test/resources/file6-lines.txt"};
-//        FileReader.main(sixLinesFile);
-//    }
-  @When("I read txt file")
-  public void iReadTxtFile() {
-    String fileName = System.getProperty("user.dir") + "/src/test/resources/file6-lines.txt";
-    lastFiveLines = FileReader.readLastFiveLines(fileName);
-  }
+    @When("I read txt file")
+    public void iReadTxtFile() {
+        String fileName = System.getProperty("user.dir") + "/src/test/resources/file6-lines.txt";
+        lastFiveLines = FileReader.readLastFiveLines(fileName);
+    }
 
     @Then("I see 5 last lines")
     public void iSeeLastLines() {
@@ -36,6 +26,4 @@ public class FileReaderSteps {
         expectedLines.add("6LINE");
         assertEquals(expectedLines, lastFiveLines);
     }
-
-
 }
