@@ -48,7 +48,7 @@ public class FileReaderSteps {
         expectedLines.add("5LINE");
         assertEquals(expectedLines, lastFiveLines);
     }
-    @Then("I see less than 5 lines")
+    @Then("I see error message")
     public void iSeeLastLines4TXT() {
         List<String> expectedLines = new ArrayList<>();
         expectedLines.add("1LINE");

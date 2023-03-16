@@ -12,4 +12,4 @@ Feature: Test File Reader
 
   Scenario: Read file with less than 5 lines
     When I read a text file with less than 5 lines
-    Then I see less than 5 lines
+    Then I see error message
