@@ -88,7 +88,7 @@ public class FileReaderSteps {
     @Then("I see error img file message")
     public void iSeeErrorImgMsg() {
         List<String> expectedLines = new ArrayList<>();
-        expectedLines.add("![](../../../../../smile.jpeg)");
+        expectedLines.add("![](iCloud Drive/desktop/smile.jpeg)");
         assertEquals(expectedLines, lastFiveLines);
     }
 
