@@ -17,7 +17,7 @@ Feature: Test File Reader
     Then I see error empty file message
 
   Scenario: Read img file
-    When I read a img file
+    When I read an img file
     Then I see error img file message
 
   Scenario: Read file with special characters

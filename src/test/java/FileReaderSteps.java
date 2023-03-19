@@ -36,7 +36,7 @@ public class FileReaderSteps {
         lastFiveLines = FileReader.main(emptyFile);
     }
 
-    @When("I read a img file")
+    @When("I read an img file")
     public void iReadAImgFile() {
         String[] imgFile = {System.getProperty("user.dir") + "/src/test/resources/file-picSmile.img"};
         lastFiveLines = FileReader.main(imgFile);
