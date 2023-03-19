@@ -20,7 +20,7 @@ public class FileReader {
                 System.err.println("The file is empty");
                 return null;
 
-            }while (line != null) {
+            } while (line != null) {
                 lines.add(line);
                 line = reader.readLine();
             }
