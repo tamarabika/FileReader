@@ -17,7 +17,7 @@ public class FileReader {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
             String line = reader.readLine();
             if (line == null) {
-                System.err.println("Error: The file is empty");
+                System.err.println("The file is empty");
                 return null;
 
             }while (line != null) {
