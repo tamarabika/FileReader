@@ -16,31 +16,32 @@ public class FileReader {
 
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
             String line = reader.readLine();
-            while (line != null) {
+            if (line == null) {
+                System.err.println("Error: The file is empty");
+                return null;
+
+            }while (line != null) {
                 lines.add(line);
                 line = reader.readLine();
             }
 
         } catch (Exception e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            System.err.println("Error reading file:" + e.getMessage());
             System.exit(1);
         }
 
         int startIndex = Math.max(0, lines.size() - 5);
 
-        if (lines == null) {
-            System.err.println("Error: The file is empty.");
+        if (!isTxtFile(fileName)) {
+            System.err.println("The file is not a text file");
+        } else if (containsSpecialCharacters(lines)) {
+            System.err.println("The file contains special characters");
         } else if (lines.size() < 5 && lines.size() > 0) {
             System.err.println("File has less than 5 lines");
-        } else if (!isTxtFile(fileName)) {
-            System.err.println("Error: The file is not a text file.");
-        } else if (containsSpecialCharacters(lines)) {
-            System.err.println("Error: The file contains special characters.");
         } else {
             for (int i = startIndex; i < lines.size(); i++) {
                 System.out.println(lines.get(i));
             }
-
         }
         return lines.subList(startIndex, lines.size());
     }

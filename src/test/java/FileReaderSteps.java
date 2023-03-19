@@ -1,49 +1,51 @@
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import org.example.FileReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class FileReaderSteps {
 
     private List<String> lastFiveLines;
 
-        @When("I read a txt file with 6 lines")
+    @When("I read a txt file with 6 lines")
     public void iReadTxtFile6() {
         String[] sixLinesFile = {System.getProperty("user.dir") + "/src/test/resources/file6-lines.txt"};
-       lastFiveLines=FileReader.main(sixLinesFile);
+        lastFiveLines = FileReader.main(sixLinesFile);
     }
 
     @When("I read a text file with 5 lines")
     public void iReadTxtFile5() {
         String[] fiveLinesFile = {System.getProperty("user.dir") + "/src/test/resources/file5-lines.txt"};
-        lastFiveLines=FileReader.main(fiveLinesFile);
+        lastFiveLines = FileReader.main(fiveLinesFile);
     }
+
     @When("I read a text file with less than 5 lines")
     public void iReadTxtFile4() {
         String[] fourLinesFile = {System.getProperty("user.dir") + "/src/test/resources/file4-lines.txt"};
-        lastFiveLines=FileReader.main(fourLinesFile);
+        lastFiveLines = FileReader.main(fourLinesFile);
     }
 
     @When("I read a text empty file")
     public void iReadATextEmptyFile() {
         String[] emptyFile = {System.getProperty("user.dir") + "/src/test/resources/empty-file.txt"};
-        lastFiveLines=FileReader.main(emptyFile);
+        lastFiveLines = FileReader.main(emptyFile);
     }
 
     @When("I read a img file")
     public void iReadAImgFile() {
         String[] imgFile = {System.getProperty("user.dir") + "/src/test/resources/file-picSmile.img"};
-        lastFiveLines=FileReader.main(imgFile);
+        lastFiveLines = FileReader.main(imgFile);
     }
 
     @When("I read a txt file with special characters")
     public void iReadATextSpecialCharactersFile() {
         String[] specialCharactersFile = {System.getProperty("user.dir") + "/src/test/resources/file-specialCharacters.txt"};
-      lastFiveLines=FileReader.main(specialCharactersFile);
+        lastFiveLines = FileReader.main(specialCharactersFile);
     }
 
     @Then("I see 5 last lines")
@@ -80,10 +82,7 @@ public class FileReaderSteps {
 
     @Then("I see error empty file message")
     public void iSeeErrorEmptyMsg() {
-        List<String> expectedLines = new ArrayList<>();
-        expectedLines.add("");
-
-        assertEquals(expectedLines, lastFiveLines);
+        assertNull(lastFiveLines);
     }
 
     @Then("I see error img file message")
