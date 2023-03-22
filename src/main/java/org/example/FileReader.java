@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
+
     public static List<String> main(String[] args) {
         if (args.length != 1) {
             System.err.println("Usage: java FileReader <file>");
@@ -20,13 +21,15 @@ public class FileReader {
                 System.err.println("The file is empty");
                 return null;
 
-            } while (line != null) {
+            }
+            while (line != null) {
                 lines.add(line);
                 line = reader.readLine();
             }
 
         } catch (Exception e) {
             System.err.println("Error reading file:" + e.getMessage());
+
             System.exit(1);
         }
 
