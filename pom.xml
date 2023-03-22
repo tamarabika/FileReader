@@ -67,8 +67,8 @@
         <guava.version>31.1-jre</guava.version>
         <gson.version>2.9.0</gson.version>
         <gson-configuration.version>1.4.1</gson-configuration.version>
+        <aspectj.version>1.8.10</aspectj.version>
     </properties>
-
     <dependencies>
         <!-- build dependencies -->
         <dependency>
@@ -107,15 +107,15 @@
             <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-slf4j18-impl</artifactId>
-		    <version>${log4j2.version}</version>
-		</dependency>
-		<dependency>
-		  <groupId>com.conversantmedia</groupId>
-		  <artifactId>disruptor</artifactId>
-		  <version>${disruptor.version}</version>
-		</dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j18-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.conversantmedia</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>${disruptor.version}</version>
+        </dependency>
 
 
         <!-- Apache Commons libraries -->
@@ -176,10 +176,10 @@
             <version>${gson.version}</version>
         </dependency>
         <dependency>
-		    <groupId>io.goodforgod</groupId>
-		    <artifactId>gson-configuration</artifactId>
-		    <version>${gson-configuration.version}</version>
-		</dependency>
+            <groupId>io.goodforgod</groupId>
+            <artifactId>gson-configuration</artifactId>
+            <version>${gson-configuration.version}</version>
+        </dependency>
 
 
         <!-- Fault tolerance library -->
@@ -215,6 +215,33 @@
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-cucumber-jvm -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber-jvm</artifactId>
+            <version>2.20.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>2.11.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -227,7 +254,32 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven.test.plugins.version}</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                        </property>
+                    </properties>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>
