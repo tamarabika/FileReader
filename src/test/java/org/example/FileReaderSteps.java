@@ -1,7 +1,8 @@
+package org.example;
+
 import io.cucumber.docstring.DocString;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.FileReader;
 
 import java.util.Arrays;
 import java.util.List;
