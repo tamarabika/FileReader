@@ -1,10 +1,16 @@
 # FileReader_cucumber_test
 
-This is a project which purpose is to demonstrate the usage of Cucumber framework, Selenide. 
+This project demonstrates the usage of Cucumber framework to test a Java program that reads text files.
 
-# Test
+# Scenario Outlines
 
-In this scenario, we want to read a text file and ensure that the last 5 lines are correctly displayed.
+There are two scenario outlines:
+
+Read a valid txt file: This scenario tests if the Java program can correctly read a valid text file and display its last
+5 lines. The scenario outline includes examples of valid text files and their expected output.
+
+Read an invalid file: This scenario tests if the Java program can handle invalid files correctly. The scenario outline
+includes examples of invalid files and their expected error messages.
 
 # Prerequisites Software/Tools
 
@@ -20,13 +26,11 @@ In this scenario, we want to read a text file and ensure that the last 5 lines a
 
 6.Cucumber
 
-7.Selenide
-
 # Installation and Test Run
 
-Clone repository and perform the following command:
+To run the test, clone the repository and run the following command:
 
-'mvn test'
+mvn test
 
 # Contributors
 
