@@ -29,18 +29,18 @@ jobs:
           ref: gh-pages
           path: gh-pages
       - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@v1.1.1
         if: always()
         id: allure-report
         with:
-          allure_results: target/surefire-reports
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-          keep_reports: 20
+          allure-results: target/allure-results
+          gh-pages: gh-pages
+          allure-report: allure-report
+          allure-history: allure-history
+          keep-reports: 20
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v2
+        uses: peaceiris/actions-gh-pages@v3.9.1
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
