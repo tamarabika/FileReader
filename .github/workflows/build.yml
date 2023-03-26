@@ -1,5 +1,4 @@
-
-name: Java CI with Maven
+name: Allure report
 
 on:
   push:
@@ -8,17 +7,47 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  allure:
+    name: Generate Allure Report
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set up JDK 11
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'temurin'
-          cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+          distribution: 'adopt'
+
+      - name: Build and run tests
+        if: always()
+        run: mvn clean test
+        continue-on-error: true
+
+      - name: Get Allure history
+        if: always()
+        uses: actions/checkout@v2
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action
+        if: always()
+        uses: simple-elf/allure-report-action@master
+        id: allure-report
+        with:
+          allure-results: target/surefire-reports
+          gh-pages: gh-pages
+          allure-report: allure-report
+          allure-history: allure-history
+          keep-reports: 20
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
