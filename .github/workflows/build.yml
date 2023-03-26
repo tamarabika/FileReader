@@ -48,4 +48,3 @@ jobs:
         uses: peaceiris/actions-gh-pages@v2
         env:
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
