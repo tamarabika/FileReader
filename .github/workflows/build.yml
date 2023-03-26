@@ -1,3 +1,4 @@
+
 name: Java CI with Maven
 
 on:
@@ -21,28 +22,3 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-               - name: Get Allure history
-               uses: actions/checkout@v2
-               if: always()
-               continue-on-error: true
-               with:
-                 ref: gh-pages
-                 path: gh-pages
-                   - name: Test marketplace action
-                       uses: tamarabika/allure-html-reporter-github-pages@v1.0
-                       if: always()
-                       id: allure-report
-                       with:
-                         token: ${{ secrets.GITHUB_TOKEN }}
-                         workflow_id: main.yml
-                         allure_results: allure-results
-                         gh_pages: gh-pages
-                         - name: Publish Github Pages
-                             if: ${{ always() }}
-                             uses: peaceiris/actions-gh-pages@v3.8.0
-                             with:
-                               github_token: ${{ secrets.GITHUB_TOKEN }}
-                               publish_branch: gh-pages
-                               publish_dir: allure-history.
-                               keep_files: true
-
